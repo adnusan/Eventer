@@ -1,11 +1,11 @@
 package com.example.eventer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,7 +26,9 @@ class MainActivity : AppCompatActivity() {
         signup_link.setOnClickListener() {
             //TODO: Add intent to go to signup page
             Toast.makeText(this, "Sign Up", Toast.LENGTH_SHORT).show()
+            val i = Intent(applicationContext, SignUp::class.java)
+            startActivity(i)
 
-    }
+        }
 }
 }
