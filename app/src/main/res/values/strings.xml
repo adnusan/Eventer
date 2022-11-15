@@ -9,4 +9,5 @@
     <string name="chat">Chat</string>
     <string name="friends">Friends</string>
     <string name="profile_picture">Profile Picture</string>
+    <string name="log_out">Log out</string>
 </resources>

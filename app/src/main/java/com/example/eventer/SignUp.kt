@@ -47,9 +47,6 @@ class SignUp : AppCompatActivity() {
         val loginRedirect = findViewById<Button>(R.id.login_redirect_button)
 
         signupButton.setOnClickListener {
-            //add username and password to database
-           //atabase.child("user").child("username").setValue(signupUsername.text.toString())
-           //atabase.child("user").child("password").setValue(signupPassword.text.toString())
             createAccount(signupUsername.text.toString(), signupPassword.text.toString())
 
             Toast.makeText(

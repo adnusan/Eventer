@@ -39,6 +39,14 @@ class Login : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.loginButton)
         val signupLink = findViewById<TextView>(R.id.signup_link)
 
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        if (firebaseUser != null) {
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
         //check user login and load profile
         loginButton.setOnClickListener {
