@@ -4,7 +4,6 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
@@ -12,7 +11,6 @@ import android.widget.Toast
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import kotlin.math.sign
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 
@@ -36,10 +34,6 @@ class SignUp : AppCompatActivity() {
 
 
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
@@ -57,21 +51,25 @@ class SignUp : AppCompatActivity() {
            //atabase.child("user").child("username").setValue(signupUsername.text.toString())
            //atabase.child("user").child("password").setValue(signupPassword.text.toString())
             createAccount(signupUsername.text.toString(), signupPassword.text.toString())
+
             Toast.makeText(
                 this,
-                "Username: ${signupUsername.text} Password: ${signupPassword.text}",
+                "Signup Successful \n Username: ${signupUsername.text} Password: ${signupPassword.text}",
                 Toast.LENGTH_SHORT
             ).show()
+
         }
 
         loginRedirect.setOnClickListener {
-            val logRedirect = Intent(applicationContext, MainActivity::class.java)
+            val logRedirect = Intent(applicationContext, Login::class.java)
             startActivity(logRedirect)
         }
 
     }
 
     private fun createAccount(email: String, password: String) {
+        val i = Intent(applicationContext, Login::class.java)
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -81,12 +79,14 @@ class SignUp : AppCompatActivity() {
                     val userid = user?.uid;
                     //create haspmap for user
                     val userMap = HashMap<String, Any>()
-                    userMap["uid"] = userid.toString()
+                    //userMap["uid"] = userid.toString()
                     userMap["email"] = email
                     userMap["password"] = password
                     if (userid != null) {
                         database.child("user").child(userid).setValue(userMap)
                     }
+                    startActivity(i)
+                    finish()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
