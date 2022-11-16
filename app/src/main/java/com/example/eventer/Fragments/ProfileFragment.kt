@@ -1,5 +1,6 @@
 package com.example.eventer.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.eventer.Login
 import com.example.eventer.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -83,8 +85,18 @@ class ProfileFragment : Fragment() {
         val username = currentEmail?.substring(0, j!!)
         // Inflate the layout for this fragment
         usernameView.text = username
+
+        logoutButton.setOnClickListener {
+            val loginIntent = Intent(context, Login::class.java)
+            auth.signOut()
+            startActivity(loginIntent)
+            activity?.finish()
+        }
+
+
         return view
     }
+
 
     companion object {
         /**
