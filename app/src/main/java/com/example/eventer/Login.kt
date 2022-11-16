@@ -30,7 +30,7 @@ class Login : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
         initializeDbRef()
         initializeAuth()
 
@@ -42,7 +42,7 @@ class Login : AppCompatActivity() {
         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
         if (firebaseUser != null) {
-            val intent = Intent(this, Profile::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -71,7 +71,7 @@ class Login : AppCompatActivity() {
 
     private fun signIn(email: String, password: String) {
         // [START sign_in_with_email]
-        val loadProfile = Intent(this, Profile::class.java)
+        val loadProfile = Intent(this, MainActivity::class.java)
 
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
