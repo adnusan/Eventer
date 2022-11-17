@@ -28,6 +28,18 @@ class Login : AppCompatActivity() {
         auth = Firebase.auth
     }
 
+    override fun onStart() {
+        super.onStart()
+        val firebaseUser = FirebaseAuth.getInstance().currentUser
+
+        //checking if user is logged in
+        if (firebaseUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -39,13 +51,7 @@ class Login : AppCompatActivity() {
         val loginButton = findViewById<Button>(R.id.loginButton)
         val signupLink = findViewById<TextView>(R.id.signup_link)
 
-        val firebaseUser = FirebaseAuth.getInstance().currentUser
 
-        if (firebaseUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
 
 
         //check user login and load profile

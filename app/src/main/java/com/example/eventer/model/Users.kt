@@ -1,4 +1,5 @@
-package com.example.eventer
+package com.example.eventer.model
+
 
 class Users (){
     var email: String? = null

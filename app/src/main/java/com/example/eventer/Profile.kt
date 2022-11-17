@@ -3,63 +3,66 @@ package com.example.eventer
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.example.eventer.databinding.ActivityMainBinding
+import com.example.eventer.model.Users
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.database.Query
-import com.example.eventer.Users
 import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.example.eventer.database.FirebaseClass
 
 
 class Profile : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+
     //firebase
-    private lateinit var auth: FirebaseAuth
-    //database reference
-    private lateinit var database: DatabaseReference
-
-
-    private fun initializeDbRef() {
-        database = Firebase.database.reference
-    }
-
-    //Firebase auth
-    private fun initializeAuth() {
-        auth = Firebase.auth
-    }
+    private val firebaseClass = FirebaseClass()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-        initializeAuth()
-        initializeDbRef()
 
-        //val firebaseUser = FirebaseAuth.getInstance().currentUser
-        //val myref = database.child("users").child(firebaseUser!!.uid)
+        //initialize firebase
+        firebaseClass.auth = Firebase.auth
+        firebaseClass.database = Firebase.database.reference
+        firebaseClass.firebaseUser = firebaseClass.auth.currentUser!!
+        firebaseClass.database = Firebase.database.reference.child("Users").child(firebaseClass.firebaseUser.uid)
 
-        val currentUser = auth.currentUser
-        val currentEmail = currentUser?.email //curent user email
+        firebaseClass.database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val user: Users? = snapshot.getValue(Users::class.java)
+                    Log.d("MainActivity", "User: ${user?.email}")
+                }
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("MainActivity", "Error: ${error.message}")
+            }
+        })
+
+        val currentUsername = firebaseClass.firebaseUser.displayName
+        //text view to display username
         val name = findViewById<TextView>(R.id.profile_username)
+        //logout button
         val logoutButton = findViewById<Button>(R.id.logout)
-
-        val j = currentEmail?.indexOf("@")
-        val username = currentEmail?.substring(0, j!!)
-
-        name.text= username
+        name.text= currentUsername
 
 
+        Toast.makeText(baseContext, "Username: $currentUsername", Toast.LENGTH_SHORT).show()
 
-        Toast.makeText(baseContext, "Username: $username", Toast.LENGTH_SHORT).show()
-
+        //logout button
         logoutButton.setOnClickListener {
-            auth.signOut()
+            FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, Login::class.java)
             Toast.makeText(baseContext, "Logging out", Toast.LENGTH_SHORT).show()
 

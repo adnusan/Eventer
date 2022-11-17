@@ -86,6 +86,12 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         usernameView.text = username
 
+        val friend_button = view.findViewById<Button>(R.id.friend_button)
+        friend_button.setOnClickListener {
+            val intent = Intent(context, Users_fragment::class.java)
+            startActivity(intent)
+        }
+
         logoutButton.setOnClickListener {
             val loginIntent = Intent(context, Login::class.java)
             auth.signOut()
