@@ -8,17 +8,15 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.eventer.databinding.ActivityMainBinding
-import com.example.eventer.model.Users
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.example.eventer.database.FirebaseClass
+import com.example.eventer.model.UsersFb
 
 
 class Profile : AppCompatActivity() {
@@ -40,7 +38,7 @@ class Profile : AppCompatActivity() {
         firebaseClass.database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val user: Users? = snapshot.getValue(Users::class.java)
+                    val user: UsersFb? = snapshot.getValue(UsersFb::class.java)
                     Log.d("MainActivity", "User: ${user?.email}")
                 }
             }

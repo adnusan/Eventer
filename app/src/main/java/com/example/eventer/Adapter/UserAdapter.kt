@@ -5,20 +5,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventer.R
+import com.example.eventer.model.UsersFb
 
-class UserAdapter(private val userList: ArrayList<String>, userEmail: ArrayList<String>) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    private var userList = ArrayList<UsersFb>()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_item, parent, false)
-        return ViewHolder(itemView)
+        return MyViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = userList[position]
-        holder.username.text = currentItem
-        holder.uid.text = currentItem
-
+        holder.usernameF.text = currentItem.username
+        holder.emailF.text = currentItem.email
+        holder.passwordF.text = currentItem.password
 
     }
 
@@ -26,11 +29,20 @@ class UserAdapter(private val userList: ArrayList<String>, userEmail: ArrayList<
         return userList.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val username: TextView = itemView.findViewById<TextView>(R.id.rc_username)
-        val uid: TextView = itemView.findViewById<TextView>(R.id.rc_uid)
 
+    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        val usernameF: TextView = itemView.findViewById(R.id.fragment_user_username)
+        val emailF: TextView = itemView.findViewById(R.id.fragment_user_email)
+        val passwordF : TextView = itemView.findViewById(R.id.fragment_user_password)
     }
+
+    fun updateList(newList: List<UsersFb>){
+        this.userList.clear()
+        this.userList.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+
 
 
 }

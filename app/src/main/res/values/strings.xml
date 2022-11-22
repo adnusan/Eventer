@@ -14,4 +14,5 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_fragment">Profile Fragment</string>
     <string name="chat_page_text">Chat fragment</string>
+    <string name="login_signuppage"><u> Login </u></string>
 </resources>

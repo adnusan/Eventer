@@ -8,7 +8,9 @@
 
     <EditText
         android:id="@+id/signup_username"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
         android:autofillHints=""
@@ -24,8 +26,10 @@
 
     <EditText
         android:id="@+id/signup_password"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="32dp"
         android:autofillHints=""
         android:ems="10"
@@ -57,7 +61,10 @@
         android:id="@+id/login_redirect_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:textColor="@color/black"
+        android:text="@string/login_signuppage"
+        android:autofillHints=""
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

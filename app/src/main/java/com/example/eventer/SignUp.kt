@@ -46,6 +46,8 @@ class SignUp : AppCompatActivity() {
         val signupButton = findViewById<Button>(R.id.signup_button)
         val loginRedirect = findViewById<Button>(R.id.login_redirect_button)
 
+
+
         signupButton.setOnClickListener {
             createAccount(signupUsername.text.toString(), signupPassword.text.toString())
 
@@ -67,6 +69,10 @@ class SignUp : AppCompatActivity() {
     private fun createAccount(email: String, password: String) {
         val i = Intent(applicationContext, Login::class.java)
 
+        val j = email.indexOf("@")
+        val username = email.substring(0, j)
+
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -79,6 +85,7 @@ class SignUp : AppCompatActivity() {
                     //userMap["uid"] = userid.toString()
                     userMap["email"] = email
                     userMap["password"] = password
+                    userMap["username"] = username
                     if (userid != null) {
                         database.child("user").child(userid).setValue(userMap)
                     }

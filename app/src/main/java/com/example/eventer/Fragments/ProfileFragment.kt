@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
+
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -88,8 +89,8 @@ class ProfileFragment : Fragment() {
 
         val friend_button = view.findViewById<Button>(R.id.friend_button)
         friend_button.setOnClickListener {
-            val intent = Intent(context, Users_fragment::class.java)
-            startActivity(intent)
+            val friendFragment = UserFragment()
+            replaceFragment(friendFragment)
         }
 
         logoutButton.setOnClickListener {
@@ -122,5 +123,12 @@ class ProfileFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction?.disallowAddToBackStack()
+        transaction?.commit()
+
     }
 }

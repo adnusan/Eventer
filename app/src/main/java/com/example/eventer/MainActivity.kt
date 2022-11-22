@@ -5,22 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.eventer.Fragments.ChatFragment
-import com.example.eventer.Fragments.EventFragment
-import com.example.eventer.Fragments.ProfileFragment
+import com.example.eventer.Fragments.*
 import com.example.eventer.databinding.ActivityMainBinding
-import com.example.eventer.model.Users
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.example.eventer.database.FirebaseClass
+import com.example.eventer.model.UsersFb
 
 class MainActivity : AppCompatActivity() {
     //view binding
@@ -33,7 +28,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
+        replaceFragment(UserFragment())
 
 
         //firebase initialization
@@ -48,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         firebaseClass.database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    val user: Users? = snapshot.getValue(Users::class.java)
+                    val user: UsersFb? = snapshot.getValue(UsersFb::class.java)
                     Toast.makeText(this@MainActivity, "Welcome ${user?.email}", Toast.LENGTH_SHORT).show()
                     Log.d("MainActivity", "User: ${user?.email}")
                 }
@@ -58,8 +54,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d("MainActivity", "Error: ${error.message}")
             }
         })
-
-
 
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_bar)
@@ -73,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.event_nav -> {
                     Log.d("MainActivity", "Event Nav")
-                    val fragment = EventFragment()
+                    val fragment = UserFragment()
                     replaceFragment(fragment)
                     Toast.makeText(this, "Event Nav", Toast.LENGTH_SHORT).show()
                     true
@@ -93,9 +87,9 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
-
     }
 }
