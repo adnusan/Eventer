@@ -50,6 +50,18 @@ class UserFragment : Fragment() {
         val view = inflater.inflate(R.layout.users_fragment, container, false)
 
         // Inflate the layout for this fragment
+        userRecyclerView = view.findViewById(R.id.recyclerView)
+        userRecyclerView.layoutManager = LinearLayoutManager(context)
+        userRecyclerView.setHasFixedSize(true)
+        adapterU = UserAdapter()
+        userRecyclerView.adapter = adapterU
+
+        viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
+
+        viewModel.allUsers.observe(viewLifecycleOwner, Observer {
+
+            adapterU.updateList(it)
+        })
 
 
         return view
@@ -76,9 +88,9 @@ class UserFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //view.findViewById<Button>(R.id.addBtn).setOnClickListener {
-        //    findNavController().navigate(R.id.action_userFragment_to_profileFragment)
-        //}
+//        view.findViewById<Button>(R.id.addBtn).setOnClickListener {
+//            findNavController().navigate(R.id.action_userFragment_to_profileFragment)
+//        }
 
         userRecyclerView = view.findViewById(R.id.recyclerView)
         userRecyclerView.layoutManager = LinearLayoutManager(context)

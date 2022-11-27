@@ -5,12 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.eventer.Adapter.UserAdapter
 import com.example.eventer.R
 import com.example.eventer.model.UsersViewModel
@@ -42,34 +36,35 @@ class ChatFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-        view?.findViewById<Button>(R.id.addBtn)?.setOnClickListener {
-            //val fragment = ProfileFragment()
-            Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
-             replaceFragment(ProfileFragment())
 
-
-        }
     }
 
         //get view from fragment_chat.xml
 
 
-        override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            // Inflate the layout for this fragment
-
-            return inflater.inflate(R.layout.fragment_chat, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val  view = inflater.inflate(R.layout.fragment_chat, container, false)
+        val addButton = view.findViewById<View>(R.id.addBtn)
+        addButton.setOnClickListener {
+            val fragment = ChatFragment()
+            val transaction = activity?.supportFragmentManager?.beginTransaction()
+            transaction?.replace(R.id.frame_layout, fragment)
+            transaction?.commit()
         }
 
-
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentTransaction = childFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout, fragment)
-        fragmentTransaction.commit()
-
+        return view
     }
+
+
+
+
+
+
+    //function to replace fragment
+
 
 }
