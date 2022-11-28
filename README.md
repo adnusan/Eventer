@@ -11,8 +11,7 @@
 - use .setValue() to set the value of the database
 - can insert object into the database
 
-Databse Structure:
-- Users
+###Databse Structure:
      --|-- userId
           |-- email
           |--password
