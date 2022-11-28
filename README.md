@@ -1,16 +1,15 @@
-# Eventer
--Eventer Android App
+# Eventer- Android App
 
 #Stack:
--Database: Firebase Realtime Database
--Language: Kotlin
--IDE: Android Studio
--API: Google Maps API, Firebase Realtime Database
+- Database: Firebase Realtime Database
+- Language: Kotlin
+- IDE: Android Studio
+- API: Google Maps API, Firebase Realtime Database
 
 #firebase
--use .child("pathname") to get the path of the database
--use .setValue() to set the value of the database
--can insert object into the database
+- use .child("pathname") to get the path of the database
+- use .setValue() to set the value of the database
+- can insert object into the database
 
 - Databse Structure:
 - ------layout------
@@ -22,7 +21,6 @@
 -      |-- userId
 -           |-- email
 -           |--password
-//readme file title
 # TODO:
 - Don't allow to send empty message
 - Implement "Add friend" feature
