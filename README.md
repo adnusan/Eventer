@@ -11,16 +11,16 @@
 - use .setValue() to set the value of the database
 - can insert object into the database
 
-- Databse Structure:
-- ------layout------
-- ---user
--      |-- userId
--            |__ email
--           |__ password
-- 
--      |-- userId
--           |-- email
--           |--password
+Databse Structure:
+------layout------
+---user
+     |-- userId
+           |__ email
+          |__ password
+
+     --|-- userId
+          |-- email
+          |--password
 # TODO:
 - Don't allow to send empty message
 - Implement "Add friend" feature
