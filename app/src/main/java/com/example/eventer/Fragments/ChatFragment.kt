@@ -1,13 +1,11 @@
 package com.example.eventer.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.eventer.Adapter.UserAdapter
+import androidx.fragment.app.Fragment
 import com.example.eventer.R
-import com.example.eventer.model.UsersViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,18 +37,16 @@ class ChatFragment : Fragment() {
 
     }
 
-        //get view from fragment_chat.xml
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val  view = inflater.inflate(R.layout.fragment_chat, container, false)
+        val view = inflater.inflate(R.layout.fragment_chat, container, false)
         val addButton = view.findViewById<View>(R.id.addBtn)
         addButton.setOnClickListener {
-            val fragment = ChatFragment()
+            val fragment = UserFragment()
             val transaction = activity?.supportFragmentManager?.beginTransaction()
             transaction?.replace(R.id.frame_layout, fragment)
             transaction?.commit()
@@ -58,13 +54,6 @@ class ChatFragment : Fragment() {
 
         return view
     }
-
-
-
-
-
-
-    //function to replace fragment
 
 
 }

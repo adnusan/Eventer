@@ -1,28 +1,33 @@
 package com.example.eventer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.eventer.Fragments.*
+import com.example.eventer.Fragments.ChatFragment
+import com.example.eventer.Fragments.ProfileFragment
+import com.example.eventer.Fragments.UserFragment
 import com.example.eventer.databinding.ActivityMainBinding
+import com.example.eventer.model.UsersFb
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.example.eventer.database.FirebaseClass
-import com.example.eventer.model.UsersFb
+
+
+private lateinit var auth: FirebaseAuth
+private lateinit var databaseReference: DatabaseReference
+private lateinit var user: FirebaseUser
 
 class MainActivity : AppCompatActivity() {
     //view binding
     private lateinit var binding: ActivityMainBinding
-    //firebase
-    private val firebaseClass = FirebaseClass()
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,19 +38,21 @@ class MainActivity : AppCompatActivity() {
 
 
         //firebase initialization
-        firebaseClass.auth = Firebase.auth
-        firebaseClass.database = Firebase.database.reference
-        firebaseClass.firebaseUser = firebaseClass.auth.currentUser!!
-
-        firebaseClass.database = Firebase.database.reference.child("Users").child(firebaseClass.firebaseUser.uid)
-
+        auth = FirebaseAuth.getInstance()
+        databaseReference = Firebase.database.reference
+        user = auth.currentUser!!
+        databaseReference = Firebase.database.reference.child("user").child(user.uid)
 
 
-        firebaseClass.database.addValueEventListener(object : ValueEventListener {
+        databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     val user: UsersFb? = snapshot.getValue(UsersFb::class.java)
-                    Toast.makeText(this@MainActivity, "Welcome ${user?.email}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Welcome ${user?.username}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.d("MainActivity", "User: ${user?.email}")
                 }
             }
@@ -58,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.nav_bar)
         bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.chat_nav -> {
                     val fragment = ChatFragment()
                     replaceFragment(fragment)

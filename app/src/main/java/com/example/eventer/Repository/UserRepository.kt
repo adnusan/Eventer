@@ -1,13 +1,16 @@
 package com.example.eventer.Repository
 
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.*
 import com.example.eventer.model.UsersFb
+import com.google.firebase.database.*
 
+//class to get data from firebase
 class UserRepository {
     private val database: DatabaseReference = FirebaseDatabase.getInstance().getReference("user")
 
-    @Volatile private var INSTANCE: UserRepository? = null
+    @Volatile
+    private var INSTANCE: UserRepository? = null
+
     //make sure there is only one instance
     fun getInstance(): UserRepository {
         return INSTANCE ?: synchronized(this) {
@@ -19,27 +22,26 @@ class UserRepository {
     }
 
 
-    fun loadUsers(userList: MutableLiveData<List<UsersFb>>){
+    fun loadUsers(userList: MutableLiveData<List<UsersFb>>) {
 
-        database.addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot){
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
                 try {
-                    val updatedUserList: List<UsersFb> = snapshot.children.mapNotNull {
-                        dataSnapshot -> dataSnapshot.getValue(UsersFb::class.java)
-                    }
+                    val updatedUserList: List<UsersFb> =
+                        snapshot.children.mapNotNull { dataSnapshot ->
+                            dataSnapshot.getValue(UsersFb::class.java)
+                        }
 
                     userList.postValue(updatedUserList)
-                }
-                catch (e: Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
             }
-            override fun onCancelled(error: DatabaseError){
+
+            override fun onCancelled(error: DatabaseError) {
                 //do nothing
             }
         })
-
-
 
 
     }

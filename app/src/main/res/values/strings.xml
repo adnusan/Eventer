@@ -15,4 +15,6 @@
     <string name="profile_fragment">Profile Fragment</string>
     <string name="chat_page_text">Chat fragment</string>
     <string name="login_signuppage"><u> Login </u></string>
+    <string name="email">email</string>
+    <string name="mesasge">Mesasge</string>
 </resources>

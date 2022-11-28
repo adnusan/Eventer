@@ -1,10 +1,10 @@
 package com.example.eventer.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +27,7 @@ private const val ARG_PARAM2 = "param2"
 private lateinit var viewModel: ViewModel
 private lateinit var userRecyclerView: RecyclerView
 lateinit var adapters: UserAdapter
+
 class EventFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

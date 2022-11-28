@@ -1,22 +1,22 @@
 package com.example.eventer
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.eventer.database.FirebaseClass
 import com.example.eventer.databinding.ActivityMainBinding
+import com.example.eventer.model.UsersFb
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.example.eventer.database.FirebaseClass
-import com.example.eventer.model.UsersFb
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 
 class Profile : AppCompatActivity() {
@@ -33,7 +33,8 @@ class Profile : AppCompatActivity() {
         firebaseClass.auth = Firebase.auth
         firebaseClass.database = Firebase.database.reference
         firebaseClass.firebaseUser = firebaseClass.auth.currentUser!!
-        firebaseClass.database = Firebase.database.reference.child("Users").child(firebaseClass.firebaseUser.uid)
+        firebaseClass.database =
+            Firebase.database.reference.child("Users").child(firebaseClass.firebaseUser.uid)
 
         firebaseClass.database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -53,7 +54,7 @@ class Profile : AppCompatActivity() {
         val name = findViewById<TextView>(R.id.profile_username)
         //logout button
         val logoutButton = findViewById<Button>(R.id.logout)
-        name.text= currentUsername
+        name.text = currentUsername
 
 
         Toast.makeText(baseContext, "Username: $currentUsername", Toast.LENGTH_SHORT).show()

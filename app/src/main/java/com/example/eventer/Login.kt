@@ -8,22 +8,26 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
+
+
+private lateinit var auth: FirebaseAuth
+private lateinit var databaseReference: DatabaseReference
+private lateinit var user: FirebaseUser
 
 class Login : AppCompatActivity() {
 
 
-    private lateinit var database: DatabaseReference //database ref
-    private lateinit var auth: FirebaseAuth //firebase auth
-
     //initialize firebase db
     private fun initializeDbRef() {
-        database = Firebase.database.reference
+        databaseReference = Firebase.database.reference
     }
+
     private fun initializeAuth() {
         auth = Firebase.auth
     }
@@ -52,18 +56,19 @@ class Login : AppCompatActivity() {
         val signupLink = findViewById<TextView>(R.id.signup_link)
 
 
-
-
-
         //check user login and load profile
         loginButton.setOnClickListener {
 
-            if(login.text.toString().isNotBlank() && password.text.toString().isNotBlank()){
+            if (login.text.toString().isNotBlank() && password.text.toString().isNotBlank()) {
                 signIn(login.text.toString(), password.text.toString())
-                Toast.makeText(this, "Login: ${login.text} Password: ${password.text}", Toast.LENGTH_SHORT).show()
-            }
-            else{
-                Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Login: ${login.text} Password: ${password.text}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(this, "Please enter a username and password", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }
@@ -74,7 +79,7 @@ class Login : AppCompatActivity() {
             val i = Intent(applicationContext, SignUp::class.java)
             startActivity(i)
         }
-}
+    }
 
     private fun signIn(email: String, password: String) {
         // [START sign_in_with_email]
@@ -91,8 +96,10 @@ class Login : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         // [END sign_in_with_email]

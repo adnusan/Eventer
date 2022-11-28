@@ -30,7 +30,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/nav_bar"
         app:menu="@menu/bottom_nav"
+        app:itemRippleColor="@color/retro_orange"
+
          />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

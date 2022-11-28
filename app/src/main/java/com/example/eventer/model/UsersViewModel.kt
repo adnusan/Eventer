@@ -5,11 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.example.eventer.Repository.UserRepository
 
 
-class UsersViewModel: ViewModel() {
+class UsersViewModel : ViewModel() {
     private val repository: UserRepository = UserRepository().getInstance()
     private val _allUsers = MutableLiveData<List<UsersFb>>()
     val allUsers: MutableLiveData<List<UsersFb>> = _allUsers
-
 
 
     init {

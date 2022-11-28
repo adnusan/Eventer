@@ -1,12 +1,11 @@
 package com.example.eventer.Fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,19 +48,19 @@ class UserFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.users_fragment, container, false)
 
-        // Inflate the layout for this fragment
-        userRecyclerView = view.findViewById(R.id.recyclerView)
-        userRecyclerView.layoutManager = LinearLayoutManager(context)
-        userRecyclerView.setHasFixedSize(true)
-        adapterU = UserAdapter()
-        userRecyclerView.adapter = adapterU
-
-        viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
-
-        viewModel.allUsers.observe(viewLifecycleOwner, Observer {
-
-            adapterU.updateList(it)
-        })
+//        // Inflate the layout for this fragment
+//        userRecyclerView = view.findViewById(R.id.recyclerView)
+//        userRecyclerView.layoutManager = LinearLayoutManager(context)
+//        userRecyclerView.setHasFixedSize(true)
+//        adapterU = UserAdapter()
+//        userRecyclerView.adapter = adapterU
+//
+//        viewModel = ViewModelProvider(this).get(UsersViewModel::class.java)
+//
+//        viewModel.allUsers.observe(viewLifecycleOwner, Observer {
+//
+//            adapterU.updateList(it)
+//        })
 
 
         return view
@@ -86,6 +85,7 @@ class UserFragment : Fragment() {
                 }
             }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        view.findViewById<Button>(R.id.addBtn).setOnClickListener {

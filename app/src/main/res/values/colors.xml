@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="rose">#FFD9DA</color>
+    <color name="tea_green">#C7D9B7</color>
+    <color name="claret">#89023E</color>
+    <color name="retro_green">#00db96</color>
+    <color name="retro_purple">#49297e</color>
+    <color name="retro_blue">#90dcff</color>
+    <color name="retro_yellow">#fdfb76</color>
+    <color name="retro_orange">#e10086</color>
+
+
 </resources>
