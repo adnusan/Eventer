@@ -12,12 +12,7 @@
 - can insert object into the database
 
 Databse Structure:
-------layout------
----user
-     |-- userId
-           |__ email
-          |__ password
-
+- Users
      --|-- userId
           |-- email
           |--password
