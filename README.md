@@ -22,4 +22,4 @@
 - Research google map api
 - Implement event page fragment
 - Add feature to change username
-- 
+- Fix back navigation
