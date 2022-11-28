@@ -1,12 +1,12 @@
 # Eventer- Android App
 
-#Stack:
+# Stack:
 - Database: Firebase Realtime Database
 - Language: Kotlin
 - IDE: Android Studio
 - API: Google Maps API, Firebase Realtime Database
 
-#firebase
+# firebase
 - use .child("pathname") to get the path of the database
 - use .setValue() to set the value of the database
 - can insert object into the database
