@@ -23,3 +23,20 @@
 - Implement event page fragment
 - Add feature to change username
 - Fix back navigation
+=======
+#firebase
+use .child("pathname") to get the path of the database
+use .setValue() to set the value of the database
+can insert object into the database
+
+Databse Structure: \n
+------layout------ \n
+---user
+      |-- userId
+            |__ email
+            |__ password
+
+      |-- userId
+            |-- email
+            |--password
+
