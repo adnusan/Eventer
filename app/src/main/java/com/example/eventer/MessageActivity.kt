@@ -18,6 +18,7 @@ class MessageActivity : AppCompatActivity() {
     //firebase
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var chatList: DatabaseReference
 
     private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messageBox: EditText
@@ -71,7 +72,7 @@ class MessageActivity : AppCompatActivity() {
                 .addValueEventListener(object: ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         //looping through all the messages inside the room
-                        messageList.clear()
+                        messageList.clear() //clear message list
 
                         for (data in snapshot.children){
                             val message = data.getValue(Message::class.java) //getting message object from firebase
@@ -89,6 +90,8 @@ class MessageActivity : AppCompatActivity() {
 
 
 
+
+
         //logics to handle send button click
         sendButton.setOnClickListener(){
             val message = messageBox.text.toString()
@@ -98,20 +101,31 @@ class MessageActivity : AppCompatActivity() {
             val messageObject = Message(message, senderId, receiverId)
 
   //          if (message.isNotEmpty()){
-                databaseReference.child("chats").child(senderRoom!!).child("messages").push()
+            databaseReference.child("chats").child(senderRoom!!).child("messages").push()
                     .setValue(messageObject).addOnSuccessListener { //on success
                         databaseReference.child("chats").child(receiverRoom!!).child("messages").push()
                             .setValue(messageObject)
                     }
-                messageBox.setText("") //clearing message box after sending message
-
-//            }
-//            else{
-//                Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
-//            }
+            messageBox.setText("")
 
 
 
+            //adding user to chat fragment: Latest chats will be displayed
+            chatList = FirebaseDatabase.getInstance().getReference("chats")
+                .child(senderRoom!!).child("messages")
+
+            chatList.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (!snapshot.exists()){
+                        chatList.child("id").setValue(receiverId)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(this@MessageActivity, error.message, Toast.LENGTH_SHORT).show()
+                }
+
+            })
         }
 
 

@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.eventer.Fragments.ChatFragment
 import com.example.eventer.Fragments.ProfileFragment
-import com.example.eventer.Fragments.UserFragment
-import com.example.eventer.Events.MapsFragment
+import com.example.eventer.Fragments.MapsFragment
 import com.example.eventer.databinding.ActivityMainBinding
 import com.example.eventer.model.UsersFb
 import com.google.android.material.bottomnavigation.BottomNavigationView
