@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.eventer.Fragments.ChatFragment
 import com.example.eventer.Fragments.ProfileFragment
 import com.example.eventer.Fragments.UserFragment
+import com.example.eventer.Events.MapsFragment
 import com.example.eventer.databinding.ActivityMainBinding
 import com.example.eventer.model.UsersFb
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -74,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.event_nav -> {
                     Log.d("MainActivity", "Event Nav")
-                    val fragment = UserFragment()
+                    val fragment = MapsFragment()
                     replaceFragment(fragment)
                     Toast.makeText(this, "Event Nav", Toast.LENGTH_SHORT).show()
                     true
