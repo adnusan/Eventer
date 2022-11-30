@@ -5,4 +5,16 @@
     <string name="username">username</string>
     <string name="signup_button">Sign Up</string>
     <string name="sign_up_link"><u>Sign Up!</u></string>
+    <string name="profile_username">username</string>
+    <string name="chat">Chat</string>
+    <string name="friends">Friends</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="log_out">Log out</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_fragment">Profile Fragment</string>
+    <string name="chat_page_text">Chat fragment</string>
+    <string name="login_signuppage"><u> Login </u></string>
+    <string name="email">email</string>
+    <string name="mesasge">Mesasge</string>
 </resources>

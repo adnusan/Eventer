@@ -4,66 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUp">
+    tools:context=".SignUp"
+    tools:layout_editor_absoluteX="-1dp"
+    tools:layout_editor_absoluteY="60dp">
 
     <EditText
-        android:id="@+id/signup_username"
-        android:layout_width="wrap_content"
+        android:id="@+id/signup_name"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginRight="20dp"
         android:autofillHints=""
         android:ems="10"
+
+        android:background="@drawable/edt_background"
+        android:paddingLeft="10dp"
+
         android:hint="@string/username"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575"
+        app:layout_constraintBottom_toTopOf="@+id/signup_username"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.863" />
+
+    <EditText
+        android:id="@+id/signup_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="316dp"
+        android:layout_marginRight="20dp"
+        android:autofillHints=""
+        android:ems="10"
+
+
+        android:background="@drawable/edt_background"
+        android:paddingLeft="10dp"
+
+        android:hint="@string/email"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#757575"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/signup_password"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="20dp"
         android:autofillHints=""
         android:ems="10"
+
+        android:background="@drawable/edt_background"
+        android:paddingLeft="10dp"
+
         android:hint="@string/password"
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_username" />
 
     <Button
         android:id="@+id/signup_button"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="@string/signup_button"
         android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/btn_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signup_password"
-        app:layout_constraintVertical_bias="0.132"
-        />
+        app:layout_constraintVertical_bias="0.164" />
 
     <Button
         android:id="@+id/login_redirect_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:autofillHints=""
+        android:background="@android:color/transparent"
+        android:text="@string/login_signuppage"
+        android:textColor="@color/retro_green"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signup_button"
+        app:layout_constraintVertical_bias="0.172" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="138dp"
+        android:layout_height="132dp"
+        app:layout_constraintBottom_toTopOf="@+id/signup_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signup_button"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.46"
+        app:srcCompat="@mipmap/logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
