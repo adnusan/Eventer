@@ -1,10 +1,11 @@
 package com.example.eventer.model
 
-class ChatList {
-    var id: String? = null
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-    constructor()
-    constructor(id: String?) {
-        this.id = id
-    }
-}
+data class ChatList (
+
+    val receiverId: String? = null,
+    //val username: String? = null
+
+)

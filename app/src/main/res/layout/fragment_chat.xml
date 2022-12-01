@@ -12,54 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/chat_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/chat"
-            android:textColor="#FF0000"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chatList_recyclerView"
-            android:layout_width="414dp"
-            android:layout_height="698dp"
+            android:layout_width="419dp"
+            android:layout_height="669dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chat_title"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/chat_page_text"
-            app:layout_constraintBottom_toBottomOf="@+id/chatList_recyclerView"
-            app:layout_constraintEnd_toEndOf="@+id/chatList_recyclerView"
-            app:layout_constraintStart_toStartOf="@+id/chatList_recyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/chat_title" />
 
         <Button
             android:id="@+id/addBtn"
-            android:text="add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:contentDescription="TODO"
+            android:text="add"
             app:layout_constraintBottom_toBottomOf="@+id/chatList_recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chat_title"
-            app:layout_constraintVertical_bias="0.853"
-            android:contentDescription="TODO" />
+            app:layout_constraintVertical_bias="0.853" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

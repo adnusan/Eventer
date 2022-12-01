@@ -120,7 +120,7 @@ class MessageActivity : AppCompatActivity() {
         val chatRef = FirebaseDatabase.getInstance().reference
 
         chatRef.child("chatList")
-            .child(currentUserId)
+            .child(currentUserId).child(receiverId)
             .child("receiverId").setValue(receiverId)
 
 
