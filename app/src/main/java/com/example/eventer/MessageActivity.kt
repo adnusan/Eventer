@@ -26,8 +26,9 @@ class MessageActivity : AppCompatActivity() {
     private var messageList = ArrayList<Message>()
 
     //unique id for each chat room between two users
-    var receiverRoom: String? = null
-    var senderRoom: String? = null
+    private var receiverRoom: String? = null
+    private var senderRoom: String? = null
+    //receive data from intent
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +39,11 @@ class MessageActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().reference
 
-        //receive data from intent
-        val name = intent.getStringExtra("name")
-        val receiverId = intent.getStringExtra("profileId")
-        val senderId = FirebaseAuth.getInstance().currentUser?.uid
+        val senderId = FirebaseAuth.getInstance().currentUser?.uid //current logged in user id
+
+        val name = intent.getStringExtra("name") //user name of the receiver
+        val receiverId = intent.getStringExtra("profileId") //user id of the user we want to chat with
+
 
         //creating unique id for room between two users since user id are unique
         senderRoom = receiverId + senderId
@@ -61,8 +63,6 @@ class MessageActivity : AppCompatActivity() {
         //logics for sending message
         messageRecyclerView.layoutManager = LinearLayoutManager(this)
         messageRecyclerView.adapter = messageAdapter
-
-
 
 
         //logics for adding messages to recycler view
@@ -87,34 +87,55 @@ class MessageActivity : AppCompatActivity() {
         })
 
 
-
-
         //logics to handle send button click
         sendButton.setOnClickListener(){
             val message = messageBox.text.toString()
-
             //create message object using message model
-            //constructor(message: String?, senderId: String?, receiverId: String?)
             val messageObject = Message(message, senderId, receiverId)
-
-  //          if (message.isNotEmpty()){
-                databaseReference.child("chats").child(senderRoom!!).child("messages").push()
-                    .setValue(messageObject).addOnSuccessListener { //on success
-                        databaseReference.child("chats").child(receiverRoom!!).child("messages").push()
-                            .setValue(messageObject)
-                    }
-                messageBox.setText("") //clearing message box after sending message
-
-//            }
-//            else{
-//                Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
-//            }
-
-
-
+            //check if message is empty
+            if (message.isNotEmpty()){
+                //add messaage to firebase
+                if (senderId != null) {
+                    sendMessage(messageObject, senderId, receiverId!!)
+                }
+            }
+            else{
+                Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
+    }
+
+
+    private fun sendMessage(messageObject: Message, currentUserId: String, receiverId: String) {
+        databaseReference.child("chats").child(senderRoom!!).child("messages").push()
+            .setValue(messageObject).addOnSuccessListener { //on success
+                databaseReference.child("chats").child(receiverRoom!!).child("messages").push()
+                    .setValue(messageObject)
+            }
+        messageBox.setText("") //clearing message box after sending message
+
+        //making chatt list of user
+        val chatRef = FirebaseDatabase.getInstance().reference
+
+        chatRef.child("chatList")
+            .child(currentUserId)
+            .child("receiverId").setValue(receiverId)
+
+
+        chatRef.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (!snapshot.exists()){
+                    chatRef.child("receiverId").setValue(receiverId)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+
+        })
     }
 
 
