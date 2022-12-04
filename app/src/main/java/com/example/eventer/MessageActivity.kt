@@ -99,6 +99,15 @@ class MessageActivity : AppCompatActivity() {
             if (message.isNotEmpty()) {
                 sendMessage(messageObject,name!!) //calling sendMessage function
 
+            databaseReference.child("chats").child(senderRoom!!).child("messages").push()
+                    .setValue(messageObject).addOnSuccessListener { //on success
+                        databaseReference.child("chats").child(receiverRoom!!).child("messages").push()
+                            .setValue(messageObject)
+                    }
+            messageBox.setText("") //clearing message box after sending message
+
+
+
             }
         }
 
