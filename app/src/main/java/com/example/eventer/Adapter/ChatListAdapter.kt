@@ -25,7 +25,7 @@ class ChatListAdapter(val context: Context, val chatList: ArrayList<ChatList>) :
     override fun onBindViewHolder(holder: ChatListViewHolder, position: Int) {
         val currentItem = chatList[position]
         holder.username.text = currentItem.name
-        holder.usernameInitial.text = substring(currentItem.name, 0, 1)
+        holder.usernameInitial.text = substring(currentItem.name, 0, 1).uppercase()
 
         //when user clicks on profile of other user then we open message activity
         holder.itemView.setOnClickListener(View.OnClickListener {
