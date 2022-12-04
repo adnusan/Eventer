@@ -16,7 +16,7 @@
           |-- email
           |--password
 # TODO:
-- ~~ Don't allow to send empty message ~~
+ ~~ Don't allow to send empty message ~~
 - Implement "Add friend" feature
 - ~~ Add list of sent messages in Chat Fragment ~~
 - Research google map api
