@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventer.MessageActivity
 import com.example.eventer.R
+import com.example.eventer.model.ChatList
 import com.example.eventer.model.UsersFb
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {

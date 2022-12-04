@@ -17,4 +17,5 @@
     <string name="login_signuppage"><u> Login </u></string>
     <string name="email">email</string>
     <string name="mesasge">Mesasge</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
