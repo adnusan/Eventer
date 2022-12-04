@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventer.Adapter.MessageAdapter
+import com.example.eventer.Fragments.AddFriends
 import com.example.eventer.model.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -18,7 +19,9 @@ class MessageActivity : AppCompatActivity() {
     //firebase
     private lateinit var auth: FirebaseAuth
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var friendListDbRef: DatabaseReference
     private lateinit var chatList: DatabaseReference
+
 
     private lateinit var messageRecyclerView: RecyclerView
     private lateinit var messageBox: EditText
@@ -29,6 +32,8 @@ class MessageActivity : AppCompatActivity() {
     //unique id for each chat room between two users
     var receiverRoom: String? = null
     var senderRoom: String? = null
+    val addFriendsFragment = AddFriends()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +48,7 @@ class MessageActivity : AppCompatActivity() {
         val name = intent.getStringExtra("name")
         val receiverId = intent.getStringExtra("profileId")
         val senderId = FirebaseAuth.getInstance().currentUser?.uid
+
 
         //creating unique id for room between two users since user id are unique
         senderRoom = receiverId + senderId
@@ -62,6 +68,15 @@ class MessageActivity : AppCompatActivity() {
         //logics for sending message
         messageRecyclerView.layoutManager = LinearLayoutManager(this)
         messageRecyclerView.adapter = messageAdapter
+
+
+        friendListDbRef = FirebaseDatabase.getInstance().reference.child("friendsList").child(senderId!!)
+            .child(receiverId!!)
+        addFriend(receiverId, name!!)
+
+
+
+
 
 
 
@@ -138,4 +153,25 @@ class MessageActivity : AppCompatActivity() {
 
         })
     }
+
+
+    //function to add friend to friend list
+    private fun addFriend(receiverId: String, name: String) {
+        friendListDbRef.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (!snapshot.exists()){
+                    friendListDbRef.child("friendId").setValue(receiverId)
+                    //add senderId user name to chatList
+                    friendListDbRef.child("name").setValue(name)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@MessageActivity, error.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
 }
+
+
