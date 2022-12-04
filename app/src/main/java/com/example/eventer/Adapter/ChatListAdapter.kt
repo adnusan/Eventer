@@ -1,6 +1,8 @@
 package com.example.eventer.Adapter
 
+import android.content.Context
 import android.content.Intent
+import android.text.TextUtils.substring
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.eventer.MessageActivity
 import com.example.eventer.R
 import com.example.eventer.model.ChatList
+import com.example.eventer.model.Message
 import com.example.eventer.model.UsersFb
 
-class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
-
-
-    private var chatList = ArrayList<ChatList>()
+class ChatListAdapter(val context: Context, val chatList: ArrayList<ChatList>) : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder {
@@ -24,14 +24,14 @@ class ChatListAdapter : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>
 
     override fun onBindViewHolder(holder: ChatListViewHolder, position: Int) {
         val currentItem = chatList[position]
-        holder.username.text = currentItem.username
-        holder.usernameInitial.text = currentItem.initial
+        holder.username.text = currentItem.name
+        holder.usernameInitial.text = substring(currentItem.name, 0, 1)
 
         //when user clicks on profile of other user then we open message activity
         holder.itemView.setOnClickListener(View.OnClickListener {
             val intent = Intent(holder.itemView.context, MessageActivity::class.java)
-            intent.putExtra("name", currentItem.username)
-            intent.putExtra("profileId", currentItem.uid)
+            intent.putExtra("name", currentItem.name)
+            intent.putExtra("profileId", currentItem.senderId)
             holder.itemView.context.startActivity(intent)
         })
 

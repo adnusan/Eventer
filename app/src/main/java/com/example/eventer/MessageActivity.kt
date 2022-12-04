@@ -87,11 +87,13 @@ class MessageActivity : AppCompatActivity() {
 
         })
 
+        //when send button is clicked call sendMessage function
+        sendMessage(senderId!!, receiverId!!,name!!)
+
+    }
 
 
-
-
-
+    private fun sendMessage(senderId: String, receiverId: String, name: String){
         //logics to handle send button click
         sendButton.setOnClickListener(){
             val message = messageBox.text.toString()
@@ -100,24 +102,30 @@ class MessageActivity : AppCompatActivity() {
             //constructor(message: String?, senderId: String?, receiverId: String?)
             val messageObject = Message(message, senderId, receiverId)
 
-  //          if (message.isNotEmpty()){
-            databaseReference.child("chats").child(senderRoom!!).child("messages").push()
+            //adding message to firebase if message is not empty
+            if(message.isNotEmpty()) {
+                databaseReference.child("chats").child(senderRoom!!).child("messages").push()
                     .setValue(messageObject).addOnSuccessListener { //on success
-                        databaseReference.child("chats").child(receiverRoom!!).child("messages").push()
+                        databaseReference.child("chats").child(receiverRoom!!).child("messages")
+                            .push()
                             .setValue(messageObject)
                     }
-            messageBox.setText("")
-
-
+                messageBox.setText("")
+            }
+            else{
+                Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
+            }
 
             //adding user to chat fragment: Latest chats will be displayed
-            chatList = FirebaseDatabase.getInstance().getReference("chats")
-                .child(senderRoom!!).child("messages")
+            chatList = FirebaseDatabase.getInstance().getReference("chatList")
+                .child(senderId).child(receiverId)
 
             chatList.addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (!snapshot.exists()){
-                        chatList.child("id").setValue(receiverId)
+                        chatList.child("senderId").setValue(receiverId)
+                        //add senderId user name to chatList
+                        chatList.child("name").setValue(name)
                     }
                 }
 
@@ -127,8 +135,6 @@ class MessageActivity : AppCompatActivity() {
 
             })
         }
-
-
     }
 
 

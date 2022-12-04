@@ -1,16 +1,13 @@
 package com.example.eventer.model
 
 class ChatList {
-    var initial: String = ""
-    var username: String = ""
-    var uid: String = ""
+    var senderId : String? = null
+    var name : String? = null
 
     constructor()
-
-    constructor(id: String, username: String) {
-        this.uid = id
-        this.username = username
-        this.initial = id.substring(0, 1)
-
+    constructor(senderId: String?, name: String?) {
+        this.senderId = senderId
+        this.name = name
     }
+
 }
