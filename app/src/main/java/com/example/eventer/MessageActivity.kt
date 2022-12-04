@@ -98,12 +98,12 @@ class MessageActivity : AppCompatActivity() {
             val messageObject = Message(message, senderId, receiverId)
 
   //          if (message.isNotEmpty()){
-                databaseReference.child("chats").child(senderRoom!!).child("messages").push()
+            databaseReference.child("chats").child(senderRoom!!).child("messages").push()
                     .setValue(messageObject).addOnSuccessListener { //on success
                         databaseReference.child("chats").child(receiverRoom!!).child("messages").push()
                             .setValue(messageObject)
                     }
-                messageBox.setText("") //clearing message box after sending message
+            messageBox.setText("") //clearing message box after sending message
 
 //            }
 //            else{
