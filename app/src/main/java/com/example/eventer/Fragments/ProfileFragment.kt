@@ -18,6 +18,18 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 
+
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [ProfileFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+
 private lateinit var auth: FirebaseAuth
 private lateinit var databaseReference: DatabaseReference
 private lateinit var user: FirebaseUser
@@ -41,6 +53,7 @@ class ProfileFragment : Fragment() {
         userFb = UsersFb()
 
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+        val profilePic = view.findViewById<ImageView>(R.id.profile_pic)
         val logoutButton = view.findViewById<Button>(R.id.logout)
 
         if (userId.isNotEmpty()) {
