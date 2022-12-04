@@ -88,14 +88,7 @@ class MessageActivity : AppCompatActivity() {
         })
 
         //when send button is clicked call sendMessage function
-        sendMessage(senderId!!, receiverId!!,name!!)
-
-    }
-
-
-    private fun sendMessage(senderId: String, receiverId: String, name: String){
-        //logics to handle send button click
-        sendButton.setOnClickListener(){
+        sendButton.setOnClickListener() {
             val message = messageBox.text.toString()
 
             //create message object using message model
@@ -103,39 +96,43 @@ class MessageActivity : AppCompatActivity() {
             val messageObject = Message(message, senderId, receiverId)
 
             //adding message to firebase if message is not empty
-            if(message.isNotEmpty()) {
-                databaseReference.child("chats").child(senderRoom!!).child("messages").push()
-                    .setValue(messageObject).addOnSuccessListener { //on success
-                        databaseReference.child("chats").child(receiverRoom!!).child("messages")
-                            .push()
-                            .setValue(messageObject)
-                    }
-                messageBox.setText("")
+            if (message.isNotEmpty()) {
+                sendMessage(messageObject,name!!) //calling sendMessage function
+
             }
-            else{
-                Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
-            }
-
-            //adding user to chat fragment: Latest chats will be displayed
-            chatList = FirebaseDatabase.getInstance().getReference("chatList")
-                .child(senderId).child(receiverId)
-
-            chatList.addListenerForSingleValueEvent(object: ValueEventListener{
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (!snapshot.exists()){
-                        chatList.child("senderId").setValue(receiverId)
-                        //add senderId user name to chatList
-                        chatList.child("name").setValue(name)
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    Toast.makeText(this@MessageActivity, error.message, Toast.LENGTH_SHORT).show()
-                }
-
-            })
         }
+
     }
 
 
+    private fun sendMessage(messageObject: Message, name: String) {
+        //logics to handle send button click
+        databaseReference.child("chats").child(senderRoom!!).child("messages").push()
+            .setValue(messageObject).addOnSuccessListener { //on success
+                databaseReference.child("chats").child(receiverRoom!!).child("messages")
+                    .push()
+                    .setValue(messageObject)
+            }
+        messageBox.setText("")
+
+
+        //adding user to chat fragment: Latest chats will be displayed
+        chatList = FirebaseDatabase.getInstance().getReference("chatList")
+            .child(messageObject.senderId!!).child(messageObject.receiverId!!)
+
+        chatList.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (!snapshot.exists()){
+                    chatList.child("senderId").setValue(messageObject.receiverId)
+                    //add senderId user name to chatList
+                    chatList.child("name").setValue(name)
+                }
+                }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@MessageActivity, error.message, Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
 }
