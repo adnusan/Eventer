@@ -1,15 +1,20 @@
 package com.example.eventer
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import com.example.eventer.Fragments.ChatFragment
-import com.example.eventer.Fragments.ProfileFragment
 import com.example.eventer.Fragments.MapsFragment
+import com.example.eventer.Fragments.ProfileFragment
 import com.example.eventer.databinding.ActivityMainBinding
 import com.example.eventer.model.UsersFb
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -28,7 +33,12 @@ private lateinit var user: FirebaseUser
 class MainActivity : AppCompatActivity() {
     //view binding
     private lateinit var binding: ActivityMainBinding
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+
+    companion object {
+        private const val PERMISSION_REQUEST_CODE = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,4 +109,47 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.frame_layout, fragment)
         fragmentTransaction.commit()
     }
+
+//    private fun checkPermission(): Boolean {
+//        return ActivityCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.ACCESS_FINE_LOCATION
+//        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//            this,
+//            Manifest.permission.ACCESS_COARSE_LOCATION
+//        ) == PackageManager.PERMISSION_GRANTED
+//
+//    }
+//
+//    private fun requestPermission(){
+//        ActivityCompat.requestPermissions(this,
+//            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION), PERMISSION_REQUEST_CODE)
+//
+//    }
+//
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        when(requestCode){
+//            PERMISSION_REQUEST_CODE -> if(grantResults.isNotEmpty()){
+//                val locationAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
+//                val coarseLocationAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED
+//                if(locationAccepted && coarseLocationAccepted){
+//                    Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+//                }else{
+//                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+//                    if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)){
+//                        Toast.makeText(this, "You should enable this permission", Toast.LENGTH_SHORT).show()
+//                    }else{
+//                        Toast.makeText(this, "You should enable this permission from settings", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+
+
+
+
+
 }
