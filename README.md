@@ -18,12 +18,11 @@
 # TODO:
 
 - ~~Don't allow to send empty message~~
-- Implement "Add friend" feature
+- ~~Implement "Add friend" feature~~
 - ~~Add list of sent messages in Chat Fragment~~
-- Research google map api
-- Implement event page fragment
-- Add feature to change username
-- Fix back navigation
+- ~~Research google map api~~
+- ~~Implement event page fragment~~
+
 =======
 #firebase
 use .child("pathname") to get the path of the database
