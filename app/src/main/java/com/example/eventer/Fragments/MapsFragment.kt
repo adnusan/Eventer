@@ -3,6 +3,7 @@ package com.example.eventer.Fragments
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
+import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 
@@ -15,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 
 import com.example.eventer.R
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -35,6 +37,9 @@ class MapsFragment : Fragment() {
     private var coarseLocationPermissionGranted = false
     private var locationPermissionGranted = false
     private var sfsuLocation = LatLng(37.7249, -122.4783)
+
+    //layouts
+    //private var markerView: View? = null
 
 
     private val callback = OnMapReadyCallback { googleMap ->
@@ -63,6 +68,7 @@ class MapsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_maps, container, false)
+
         permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
             fineLocationPermissionGranted = permissions[android.Manifest.permission.ACCESS_FINE_LOCATION] ?: fineLocationPermissionGranted
             coarseLocationPermissionGranted = permissions[android.Manifest.permission.ACCESS_COARSE_LOCATION] ?: coarseLocationPermissionGranted
@@ -78,30 +84,9 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
-    }
-
-    //function to show curent location
-    @SuppressWarnings("MissingPermission")
-    private fun showCurrentLocation(){
-        if(locationPermissionGranted){
-            val userLocation = fusedLocationProviderClient?.lastLocation
-            userLocation?.addOnSuccessListener { location ->
-                if(location != null){
-                    val currentLocation = LatLng(location.latitude, location.longitude)
-                    mMap.addMarker(MarkerOptions().position(currentLocation).title("Current Location"))
-                    mMap.moveCamera(zoomTo(15f))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
-                }
-                else{
-                    Toast.makeText(context, "Location not found", Toast.LENGTH_SHORT).show()
-                    mMap.moveCamera(zoomTo(15f))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sfsuLocation))
-                }
-            }
-        }
-
     }
 
 
@@ -132,6 +117,30 @@ class MapsFragment : Fragment() {
         }
 
     }
+
+    //function to show curent location
+    @SuppressWarnings("MissingPermission")
+    private fun showCurrentLocation(){
+        if(locationPermissionGranted){
+            val userLocation = fusedLocationProviderClient?.lastLocation
+            userLocation?.addOnSuccessListener { location ->
+                if(location != null){
+                    val currentLocation = LatLng(location.latitude, location.longitude)
+                    mMap.addMarker(MarkerOptions().position(currentLocation).title("Current Location"))
+                    mMap.moveCamera(zoomTo(15f))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
+                }
+                else{
+                    Toast.makeText(context, "Location not found", Toast.LENGTH_SHORT).show()
+                    mMap.moveCamera(zoomTo(15f))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sfsuLocation))
+                }
+            }
+        }
+
+    }
+
+
 
 
 

@@ -14,7 +14,8 @@ import com.example.eventer.model.ChatList
 import com.example.eventer.model.Message
 import com.example.eventer.model.UsersFb
 
-class ChatListAdapter(val context: Context, val chatList: ArrayList<ChatList>) : RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
+class ChatListAdapter(val context: Context, val chatList: ArrayList<ChatList>) :
+    RecyclerView.Adapter<ChatListAdapter.ChatListViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatListViewHolder {

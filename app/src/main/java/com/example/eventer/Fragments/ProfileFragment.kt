@@ -42,6 +42,7 @@ class ProfileFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val logoutButton = view.findViewById<Button>(R.id.logout)
+        val friendsButton = view.findViewById<Button>(R.id.friend_button)
 
         if (userId.isNotEmpty()) {
             getUserData()
@@ -52,6 +53,12 @@ class ProfileFragment : Fragment() {
             auth.signOut()
             startActivity(loginIntent)
             activity?.finish()
+        }
+
+        //freind button
+        friendsButton.setOnClickListener {
+            val friendListFragment = FriendList()
+            replaceFragment(friendListFragment)
         }
 
         return view
@@ -71,5 +78,11 @@ class ProfileFragment : Fragment() {
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction?.commit()
     }
 }
