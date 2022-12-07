@@ -18,7 +18,7 @@ import com.google.firebase.database.*
 class AllEventsFragment : Fragment() {
     private lateinit var alleventListRecyclerView: RecyclerView
     private lateinit var alleventListAdapter: EventListAdapter
-    private var alleventList = ArrayList<Event>()
+    private var alleventList = mutableListOf<Event>()
     //firebase
     private lateinit var fuser: FirebaseUser
     private lateinit var databaseReference: DatabaseReference
@@ -72,7 +72,7 @@ class AllEventsFragment : Fragment() {
     }
 
     fun  loadEventList() {
-        alleventListAdapter = EventListAdapter(requireContext(),alleventList)
+        alleventListAdapter = EventListAdapter(requireContext(),alleventList as ArrayList<Event>)
         alleventListRecyclerView.adapter = alleventListAdapter
     }
 }

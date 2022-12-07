@@ -17,7 +17,6 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
 
 
     private var userList = ArrayList<UsersFb>()
-    val addFreidndData = Bundle()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView =
@@ -47,15 +46,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
             holder.itemView.context.startActivity(intent)
 
         })
-
-
-
-
-
-
-
     }
-    //holder.passwordF.text = currentItem.password
 
 
     override fun getItemCount(): Int {

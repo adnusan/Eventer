@@ -20,7 +20,7 @@ import com.google.firebase.database.*
 class EventListFragment : Fragment() {
     private lateinit var eventListRecyclerView: RecyclerView
     private lateinit var eventListAdapter: EventListAdapter
-    private var eventList = ArrayList<Event>()
+    private var eventList = mutableListOf<Event> ()
     //firebase
     private lateinit var fuser: FirebaseUser
     private lateinit var databaseReference: DatabaseReference
@@ -52,8 +52,8 @@ class EventListFragment : Fragment() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 eventList.clear()
-                for (snapshot in snapshot.children) {
-                    val event = snapshot.getValue(Event::class.java)
+                for (temp in snapshot.children) {
+                    val event = temp.getValue(Event::class.java)
                     eventList.add(event!!)
                 }
                 loadEventList()
@@ -66,7 +66,7 @@ class EventListFragment : Fragment() {
     }
 
     fun  loadEventList() {
-        eventListAdapter = EventListAdapter(requireContext(),eventList)
+        eventListAdapter = EventListAdapter(requireContext(),eventList as ArrayList<Event>)
         eventListRecyclerView.adapter = eventListAdapter
     }
 
