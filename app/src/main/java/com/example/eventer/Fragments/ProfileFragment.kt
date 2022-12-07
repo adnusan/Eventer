@@ -43,6 +43,7 @@ class ProfileFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val logoutButton = view.findViewById<Button>(R.id.logout)
         val friendsButton = view.findViewById<Button>(R.id.friend_button)
+        val myeventButton = view.findViewById<Button>(R.id.myeventsButton)
 
         if (userId.isNotEmpty()) {
             setUserData()
@@ -59,6 +60,11 @@ class ProfileFragment : Fragment() {
         friendsButton.setOnClickListener {
             val friendListFragment = FriendList()
             replaceFragment(friendListFragment)
+        }
+        myeventButton.setOnClickListener{
+            //val myEventFragment = EventListFragment()
+            val myEventFragment = EventListFragment()
+            replaceFragment(myEventFragment)
         }
 
         return view

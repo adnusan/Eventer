@@ -76,8 +76,8 @@ class ChatFragment : Fragment() {
 
         })
 
-        val addButton = view.findViewById<View>(R.id.addBtn)
-        addButton.setOnClickListener {
+        val floaingActionButton = view.findViewById<View>(R.id.addFriendButton)
+        floaingActionButton.setOnClickListener {
             val fragment = UserFragment()
             replaceFragment(fragment)
         }

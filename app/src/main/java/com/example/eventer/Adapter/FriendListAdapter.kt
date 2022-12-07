@@ -29,7 +29,14 @@ class FriendListAdapter(val context: Context, val friendList: ArrayList<FriendLi
     override fun onBindViewHolder(holder: FriendListViewHolder, position: Int) {
         val currentFriendList = friendList[position]
         holder.friendNameInitial.text =  substring(currentFriendList.name, 0, 1).uppercase()
-        holder.friend_username.text = currentFriendList.name
+        holder.friendUsername.text = currentFriendList.name
+
+        holder.itemView.setOnClickListener(View.OnClickListener {
+            val intent = Intent(holder.itemView.context, MessageActivity::class.java)
+            intent.putExtra("name", currentFriendList.name)
+            intent.putExtra("profileId", currentFriendList.friendId)
+            holder.itemView.context.startActivity(intent)
+        })
     }
 
     override fun getItemCount(): Int {
@@ -38,7 +45,7 @@ class FriendListAdapter(val context: Context, val friendList: ArrayList<FriendLi
 
     class FriendListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val friendNameInitial: TextView = itemView.findViewById(R.id.friendlist_username_Initial)
-        val friend_username: TextView = itemView.findViewById(R.id.friendlist_username)
+        val friendUsername: TextView = itemView.findViewById(R.id.friendlist_username)
     }
 
 

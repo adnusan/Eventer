@@ -5,6 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp"
+    android:background="@android:color/transparent"
+
     android:layout_margin="16dp">
 
     <LinearLayout
@@ -12,6 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginVertical="6dp"
+
+
         android:orientation="vertical">
 
         <LinearLayout
@@ -29,11 +33,11 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/fragment_user_username"
+                android:id="@+id/alleventlist_username_fragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="username"
+                android:text="Nusan"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
 
@@ -48,35 +52,71 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Email: "
+                android:text="Title: "
                 android:textColor="@color/black"
                 android:textSize="26sp"
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/fragment_user_email"
+                android:id="@+id/alleventlist_title_fragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="username@mail.com"
+                android:text="Event Title"
                 android:textColor="@color/black"
                 android:textSize="20sp"/>
 
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/fragment_add_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Add" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Longitude: "
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/alleventlist_longitude_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="longitude"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Latitude: "
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/alleventlist_latitude_fragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="latitude"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
