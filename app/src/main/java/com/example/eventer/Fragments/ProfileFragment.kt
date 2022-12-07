@@ -45,7 +45,7 @@ class ProfileFragment : Fragment() {
         val friendsButton = view.findViewById<Button>(R.id.friend_button)
 
         if (userId.isNotEmpty()) {
-            getUserData()
+            setUserData()
         }
         //logout button
         logoutButton.setOnClickListener {
@@ -65,7 +65,7 @@ class ProfileFragment : Fragment() {
     }
 
     //loads userdata from firebase and sets it to the profile
-    private fun getUserData() {
+    private fun setUserData() {
         databaseReference.child(user.uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 userFb = dataSnapshot.getValue(UsersFb::class.java)!!
