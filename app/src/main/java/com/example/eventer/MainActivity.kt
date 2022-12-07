@@ -79,20 +79,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.chat_nav -> {
                     val fragment = ChatFragment()
                     replaceFragment(fragment)
-                    Toast.makeText(this, "Chat Nav", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "Chat Nav", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.event_nav -> {
                     Log.d("MainActivity", "Event Nav")
                     val fragment = MapsFragment()
                     replaceFragment(fragment)
-                    Toast.makeText(this, "Event Nav", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "Event Nav", Toast.LENGTH_SHORT).show()
                     true
                 }
                 R.id.profile_nav -> {
                     val fragment = ProfileFragment()
                     replaceFragment(fragment)
-                    Toast.makeText(this, "Profile Nav", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "Profile Nav", Toast.LENGTH_SHORT).show()
                     true
                 }
                 else -> false

@@ -118,27 +118,6 @@ class MapsFragment : Fragment() {
 
     }
 
-    //function to show curent location
-    @SuppressWarnings("MissingPermission")
-    private fun showCurrentLocation(){
-        if(locationPermissionGranted){
-            val userLocation = fusedLocationProviderClient?.lastLocation
-            userLocation?.addOnSuccessListener { location ->
-                if(location != null){
-                    val currentLocation = LatLng(location.latitude, location.longitude)
-                    mMap.addMarker(MarkerOptions().position(currentLocation).title("Current Location"))
-                    mMap.moveCamera(zoomTo(15f))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation))
-                }
-                else{
-                    Toast.makeText(context, "Location not found", Toast.LENGTH_SHORT).show()
-                    mMap.moveCamera(zoomTo(15f))
-                    mMap.moveCamera(CameraUpdateFactory.newLatLng(sfsuLocation))
-                }
-            }
-        }
-
-    }
 
 
 

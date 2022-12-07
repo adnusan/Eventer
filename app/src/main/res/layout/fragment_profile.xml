@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/btn_background"
             android:contextClickable="true"
             android:text="@string/friends"
             android:textAlignment="center"

@@ -9,12 +9,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.eventer.Fragments.AddFriends
 import com.example.eventer.MessageActivity
 import com.example.eventer.R
-import com.example.eventer.model.ChatList
 import com.example.eventer.model.UsersFb
-import com.google.firebase.database.DatabaseReference
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.MyViewHolder>() {
 
