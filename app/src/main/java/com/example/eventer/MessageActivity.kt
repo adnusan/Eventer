@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.eventer.Adapter.MessageAdapter
-import com.example.eventer.Fragments.AddFriends
 import com.example.eventer.model.Message
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -32,7 +30,6 @@ class MessageActivity : AppCompatActivity() {
     //unique id for each chat room between two users
     var receiverRoom: String? = null
     var senderRoom: String? = null
-    val addFriendsFragment = AddFriends()
 
 
 
@@ -112,7 +109,7 @@ class MessageActivity : AppCompatActivity() {
 
             //adding message to firebase if message is not empty
             if (message.isNotEmpty()) {
-                sendMessage(messageObject,name!!) //calling sendMessage function
+                sendMessage(messageObject,name) //calling sendMessage function
 
             }
             else{

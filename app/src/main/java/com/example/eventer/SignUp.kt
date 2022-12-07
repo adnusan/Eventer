@@ -60,7 +60,7 @@ class SignUp : AppCompatActivity() {
 
             Toast.makeText(
                 this,
-                "Signup Successful \n Username: ${signupUsername.text} Password: ${signupPassword.text}",
+                "Signup Successful for ${signupUsername.text.toString()}",
                 Toast.LENGTH_SHORT
             ).show()
 

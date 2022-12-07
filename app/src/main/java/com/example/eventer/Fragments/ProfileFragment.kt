@@ -42,9 +42,10 @@ class ProfileFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val logoutButton = view.findViewById<Button>(R.id.logout)
+        val friendsButton = view.findViewById<Button>(R.id.friend_button)
 
         if (userId.isNotEmpty()) {
-            getUserData()
+            setUserData()
         }
         //logout button
         logoutButton.setOnClickListener {
@@ -54,11 +55,17 @@ class ProfileFragment : Fragment() {
             activity?.finish()
         }
 
+        //freind button
+        friendsButton.setOnClickListener {
+            val friendListFragment = FriendList()
+            replaceFragment(friendListFragment)
+        }
+
         return view
     }
 
     //loads userdata from firebase and sets it to the profile
-    private fun getUserData() {
+    private fun setUserData() {
         databaseReference.child(user.uid).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 userFb = dataSnapshot.getValue(UsersFb::class.java)!!
@@ -71,5 +78,11 @@ class ProfileFragment : Fragment() {
 
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction?.commit()
     }
 }

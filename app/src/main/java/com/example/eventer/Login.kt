@@ -63,7 +63,7 @@ class Login : AppCompatActivity() {
                 signIn(login.text.toString(), password.text.toString())
                 Toast.makeText(
                     this,
-                    "Login: ${login.text} Password: ${password.text}",
+                    "Login: ${login.text} Success",
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
@@ -90,7 +90,6 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
                     startActivity(loadProfile)
                     finish()
                 } else {
