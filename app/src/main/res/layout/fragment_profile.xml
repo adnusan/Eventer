@@ -68,16 +68,29 @@
             android:id="@+id/logout"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:background="@drawable/btn_background"
             android:text="@string/log_out"
             android:textColor="@color/retro_orange"
-            android:textStyle="bold"
-            android:background="@drawable/btn_background"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/friend_button"
-            app:layout_constraintVertical_bias="0.228" />
+            app:layout_constraintTop_toBottomOf="@+id/myeventsButton"
+            app:layout_constraintVertical_bias="0.223" />
+
+        <Button
+            android:id="@+id/myeventsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            android:background="@drawable/btn_background"
+            android:text="My Events"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/friend_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
