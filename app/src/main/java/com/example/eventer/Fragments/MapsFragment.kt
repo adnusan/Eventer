@@ -95,6 +95,13 @@ class MapsFragment : Fragment() , OnMarkerClickListener {
         savedInstanceState: Bundle?
     ): View? {
         var view = inflater.inflate(R.layout.fragment_maps, container, false)
+        var view_all_events_button = view.findViewById<View>(R.id.view_all_events_button)
+
+
+        view_all_events_button.setOnClickListener{
+            val  viewAllEventFragment = AllEventsFragment()
+            replaceFragment(viewAllEventFragment)
+        }
 
         //firebase
         auth = FirebaseAuth.getInstance()
@@ -180,6 +187,12 @@ class MapsFragment : Fragment() , OnMarkerClickListener {
                 Toast.makeText(requireContext(), "Event Created", Toast.LENGTH_SHORT).show()
             }
 
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val transaction = activity?.supportFragmentManager?.beginTransaction()
+        transaction?.replace(R.id.frame_layout, fragment)
+        transaction?.commit()
     }
 
 

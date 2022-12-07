@@ -62,6 +62,7 @@ class ProfileFragment : Fragment() {
             replaceFragment(friendListFragment)
         }
         myeventButton.setOnClickListener{
+            //val myEventFragment = EventListFragment()
             val myEventFragment = EventListFragment()
             replaceFragment(myEventFragment)
         }
